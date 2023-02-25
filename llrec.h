@@ -12,7 +12,7 @@ struct Node
     int val;
     Node *next;
 
-    Node(int v, Node* n) : val(v), next(n) {}
+    Node(int v, Node* n) : val(v), next(n) {} 
 };
 
 
@@ -84,7 +84,21 @@ Node* llfilter(Node* head, Comp pred)
     // Provide your implementation below
     //*********************************************
 
-
+    // Base: head = NULL
+    if (head == NULL) return NULL;
+    // set up a pointer
+    Node* temp; 
+    if (pred(head ->val))
+    {
+        temp = llfilter(head->next, pred);
+				delete head;
+    }
+    else 
+    {
+        temp = head;
+        temp->next = llfilter(head->next, pred);
+    }
+	return temp;
 }
 
 #endif
